@@ -1,5 +1,4 @@
 ﻿//import CommentList from "./CommentList";
-//import Styles from './Styles.css'
 
 class App extends React.Component
 {
@@ -7,8 +6,7 @@ class App extends React.Component
         super(props);
         this.state = {
             repos: [],
-            inputValue: '',
-            isLoading : false,
+            inputValue: ''
         };
 
         this.getRepos = this.getRepos.bind(this);
@@ -20,9 +18,6 @@ class App extends React.Component
     }
 
     fetchAPI = (param) => {
-        this.setState({
-            isLoading: true,
-        })
         fetch("https://api.github.com/search/repositories?q=" + param)
             .then(res => res.json())
             .then((result) => {
@@ -34,11 +29,6 @@ class App extends React.Component
                 (error) => {
                     console.log(error)
                 });
-
-        this.setState({
-            isLoading: false,
-        })
-
     }
 
 
@@ -49,13 +39,23 @@ class App extends React.Component
     }
 
     addBookmark= function(id,img,fullName, event){
-        //alert('Hi hi hi !!!' + id + img + fullName);
-        console.log(id, img, fullName,);
-        //console.log(this.userData);
-        //let userImg = this.userImg.current.src;
-        ////let repoName = this.repoName;
-        //console.log(userImg)
-        //console.log(this.repoName.current)
+        console.log(id, img, fullName);
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url:"Home/saveBookmark",
+            data: JSON.stringify({ 'userId': id, 'avatar': img, 'repoName': fullName}),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (responce)
+            {
+                alert(responce.Message)
+            },
+            error: function ()
+            {
+                alert("Error while saving bookmark. :/");
+            }
+        });  
     }
 
     handleChange(e) {

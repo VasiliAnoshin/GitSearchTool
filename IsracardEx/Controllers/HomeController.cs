@@ -13,5 +13,13 @@ namespace IsracardEx.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult saveBookmark(string userId, string avatar, string repoName)
+        {
+
+            string message = "SUCCESS";
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
     }
 }
