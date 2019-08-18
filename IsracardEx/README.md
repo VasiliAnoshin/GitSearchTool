@@ -13,5 +13,7 @@ https://api.github.com/search/repositories?q=YOUR_SEARCH_KEYWORD <br/>
 ReactJS, MVC.NET, Bootstrap
 
 ## Run instructions
-Clone and Run in vs
+Clone and Run in VisualStudion 2015/2019
+VS2015 need update of .NetFramewrk,Version = v4.7.2
+
 
