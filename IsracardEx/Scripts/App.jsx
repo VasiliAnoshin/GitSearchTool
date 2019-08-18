@@ -1,6 +1,4 @@
-﻿//import CommentList from "./CommentList";
-
-class App extends React.Component
+﻿class App extends React.Component
 {
     constructor(props) {
         super(props);
@@ -14,10 +12,15 @@ class App extends React.Component
         this.keyPress = this.keyPress.bind(this);
         this.fetchAPI = this.fetchAPI.bind(this);
         this.addBookmark = this.addBookmark.bind(this);
-        
     }
 
     fetchAPI = (param) => {
+        if (this.state.inputValue == "")
+        {
+            alert('Insert Repository Name....')
+            return;
+        }
+
         fetch("https://api.github.com/search/repositories?q=" + param)
             .then(res => res.json())
             .then((result) => {
@@ -31,15 +34,12 @@ class App extends React.Component
                 });
     }
 
-
     getRepos = (e) => {
         e.preventDefault();
         this.fetchAPI(this.state.inputValue);
-        console.log('The link was clicked.');
     }
 
     addBookmark= function(id,img,fullName, event){
-        console.log(id, img, fullName);
         $.ajax({
             type: "POST",
             dataType: "JSON",
@@ -64,7 +64,6 @@ class App extends React.Component
 
     keyPress(e) {
         if (e.keyCode == 13) {
-            console.log('input value is : ', e.target.value);
             this.fetchAPI(e.target.value)
         }
     }
