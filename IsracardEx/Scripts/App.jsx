@@ -16,6 +16,7 @@ class App extends React.Component
         this.keyPress = this.keyPress.bind(this);
         this.fetchAPI = this.fetchAPI.bind(this);
         this.addBookmark = this.addBookmark.bind(this);
+        
     }
 
     fetchAPI = (param) => {
@@ -47,8 +48,14 @@ class App extends React.Component
         console.log('The link was clicked.');
     }
 
-    addBookmark(e){
-        alert('Hi hi hi !!!');
+    addBookmark= function(id,img,fullName, event){
+        //alert('Hi hi hi !!!' + id + img + fullName);
+        console.log(id, img, fullName,);
+        //console.log(this.userData);
+        //let userImg = this.userImg.current.src;
+        ////let repoName = this.repoName;
+        //console.log(userImg)
+        //console.log(this.repoName.current)
     }
 
     handleChange(e) {
@@ -95,16 +102,19 @@ class App extends React.Component
                                         Object.keys(this.state.repos.items).map((key) => (
                                             <li key={this.state.repos.items[key].id}>
                                                 <div className="parent">
-                                                    <p className="repoAuther"> Full Repository Name:  {this.state.repos.items[key].full_name} </p>
+                                                    <p className="repoAuther" val = {this.state.repos.items[key].id}> Full Repository Name:  {this.state.repos.items[key].full_name} </p>
                                                     <hr/>
                                                     <div className="left">
-                                                        <img src={this.state.repos.items[key]["owner"].avatar_url} alt='avatarUrl' className='avaImg' />
+                                                        <img src={this.state.repos.items[key]["owner"].avatar_url} alt='avatarUrl' className='avaImg'/>
                                                     </div>
                                                 
                                                     <div className="middle">
                                                         <a href="#"
                                                             className="btn btn-success btn-lg"
-                                                            onClick={this.addBookmark}>Add Page to Bookmark</a>
+                                                            onClick={this.addBookmark.bind(this, this.state.repos.items[key].id, 
+                                                                     this.state.repos.items[key]["owner"].avatar_url,
+                                                                     this.state.repos.items[key].full_name)
+                                                                     }>Add Page to Bookmark</a>
                                                     </div>
                                                 </div>
                                             </li>
