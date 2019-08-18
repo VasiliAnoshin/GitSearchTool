@@ -44,7 +44,7 @@ class App extends React.Component
             type: "POST",
             dataType: "JSON",
             url:"Home/saveBookmark",
-            data: JSON.stringify({ 'userId': id, 'avatar': img, 'repoName': fullName}),
+            data: JSON.stringify({ 'repoId': id, 'avatar': img, 'repoName': fullName}),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (responce)

@@ -15,11 +15,18 @@ namespace IsracardEx.Controllers
         }
 
         [HttpPost]
-        public ActionResult saveBookmark(string userId, string avatar, string repoName)
+        public ActionResult saveBookmark(string repoId, string avatar, string repoName)
         {
-
-            string message = "SUCCESS";
-            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+            if (String.IsNullOrEmpty(repoId) || String.IsNullOrEmpty(avatar) || String.IsNullOrEmpty(repoName))
+            {
+                return Json(new { Message = "ERROR in input values.", JsonRequestBehavior.AllowGet });
+            }
+            if (Session[repoId] != null)
+            {
+                return Json(new { Message = "This Repository was bookmarked already!", JsonRequestBehavior.AllowGet });
+            }
+            Session[repoId] = new Models.Repository(avatar, repoName, repoId);
+            return Json(new { Message = "Bookmark was saved SUCCESSFULLY!", JsonRequestBehavior.AllowGet });
         }
     }
 }
